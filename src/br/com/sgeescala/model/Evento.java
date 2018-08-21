@@ -10,6 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 import br.unitins.frame.model.Model;
 
 @Entity
@@ -22,13 +23,15 @@ public class Evento extends	Model<Evento> {
 	@SequenceGenerator(name = "seqidevento", sequenceName = "seqidevento", allocationSize = 1)
 	private Integer id;
 	
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	private String nome;
 	
+	
 	@Override
 	public Integer getId() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubLocalTime
 		return id;
 	}
 
@@ -37,13 +40,7 @@ public class Evento extends	Model<Evento> {
 		// TODO Auto-generated method stub
 		this.id = id;
 	}
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -51,4 +48,13 @@ public class Evento extends	Model<Evento> {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
 }

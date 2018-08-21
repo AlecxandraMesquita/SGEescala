@@ -7,26 +7,21 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 
-@Entity
-public class Lider extends Voluntario{
 
-	private static final long serialVersionUID = -5673840314049477335L;
+public enum TipoVoluntario{
+
+	COORDENADOR(0,"Coordenador"),
+	VOLUNTARIO(1,"Voluntario");
 	
-//	private Integer id;
+	
+	private Integer valor;
 	private String nome;
-
-
-	@Override
-	public Integer getId() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	private TipoVoluntario(Integer valor, String nome) {
+		this.valor = valor;
+		this.nome = nome;
 	}
 
-	@Override
-	public void setId(Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
 	public String getNome() {
 		return nome;
 	}
@@ -34,5 +29,14 @@ public class Lider extends Voluntario{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public Integer getValor() {
+		return valor;
+	}
+
+	public void setValor(Integer valor) {
+		this.valor = valor;
+	}
+	
 	
 }

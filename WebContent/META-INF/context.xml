@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable="true">
+	<Resource name="jdbc/escalaTrilhar" 
+		auth="Container" 
+		type="javax.sql.DataSource"
+		maxActive="100"
+		maxIdle="30"
+		maxWait="10000"
+		username="root" 
+		password="123" 
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://10.42.0.97:3306/escalaTrilhar?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8" />
+</Context>

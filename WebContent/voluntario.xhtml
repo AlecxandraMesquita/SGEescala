@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="template.xhtml">
+
+	<ui:define name="conteudo">
+	
+		<f:view>
+			<center>
+		
+				<h:form id="form">
+					<p:growl id="growl" showDetail="false" sticky="false"  life="5000" /> 
+					<p:panel id="panel" header="Cadastro de Voluntário">
+						<p:panelGrid id="pgDados" columns="2" styleClass="semBorda">
+																	 
+							<p:commandLink value="Nome:"
+								actionListener="#{voluntarioController.abrirListPessoa}">
+								<p:ajax event="dialogReturn" update="form" return="true"/>
+							</p:commandLink>
+
+							<p:inputText id="Nome" value="#{voluntarioController.entity.pessoa.nome}" placeholder="Nome" disabled="true"/>
+													 							
+							<p:selectOneMenu id = "Equipe"
+								value = "#{voluntarioController.entity.turma}">
+								<f:selectItem itemLabel= "Que Turma Pertence? " itemValue = ""/>
+								<f:selectItems value ="#{voluntarioController.listaTurma}" var="e"
+									itemValue="#{e}" itemLabel = "#{e.nome}"/>
+							</p:selectOneMenu>
+							
+							<p:selectOneMenu id = "Cor_Equipe"
+								value = "#{voluntarioController.entity.turma}">
+								<f:selectItem itemLabel= "Que Cor Pertence? " itemValue = ""/>
+								<f:selectItems value ="#{voluntarioController.listaTurma}" var="c"
+									itemValue="#{c}" itemLabel = "#{c.cor}"/>
+							</p:selectOneMenu>
+																	
+							<p:selectOneMenu id = "TipoVoluntario"
+								value = "#{voluntarioController.entity.tipo}">
+								<f:selectItem itemLabel= "Voluntario/Cordenador?" itemValue = ""/>
+								<f:selectItems value ="#{voluntarioController.tipo}" var="st"
+									itemValue="#{st}" itemLabel = "#{st.nome}"/>
+							</p:selectOneMenu>
+							
+							<p:inputText value="#{voluntarioController.entity.senha}" placeholder="Senha"/>
+											
+													
+									
+						</p:panelGrid>
+						<br/>
+						
+						<p:commandButton value="Incluir" 
+							actionListener="#{voluntarioController.insert}" 
+							disabled="#{voluntarioController.entity.id != null}"
+							process="panel" update="form" />
+						
+						<p:commandButton value="Alterar" 
+							actionListener="#{voluntarioController.update}" 
+							disabled="#{voluntarioController.entity.id == null}"
+							process="panel" update="form" />
+				
+						<p:commandButton value="Excluir" 
+							actionListener="#{voluntarioController.delete}" 
+							disabled="#{voluntarioController.entity.id == null}"	
+							process="panel" update="form" />
+						
+						<p:commandButton value="Limpar" icon="" 
+							actionListener="#{voluntarioController.clean}" 
+							process="panel" update="form" />
+					</p:panel>
+						<br/>
+					<p:separator id="separator" />
+					<br/>
+					
+				</h:form>
+			</center>	
+		</f:view>
+	</ui:define>
+</ui:composition>

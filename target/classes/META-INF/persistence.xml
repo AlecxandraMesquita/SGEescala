@@ -1,51 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+
 	<persistence-unit name="SGEEscala">
-	
-	
+		<non-jta-data-source>java:/comp/env/jdbc/escalaTrilhar</non-jta-data-source>
+		
 		<class>br.com.sgeescala.model.Data</class>
-		<class>br.com.sgeescala.model.Equipe</class>
+		<class>br.com.sgeescala.model.Turma</class>
 		<class>br.com.sgeescala.model.Escala</class>
 		<class>br.com.sgeescala.model.Evento</class>
-		<class>br.com.sgeescala.model.Lider</class>
 		<class>br.com.sgeescala.model.Voluntario</class>
-				
+		<class>br.com.sgeescala.model.Pessoa</class>
 		<shared-cache-mode>NONE</shared-cache-mode>
-
 		<properties>
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+			<property name="eclipselink.logging.level" value="ALL" />
+		</properties>
+	</persistence-unit>
 
-			<!-- <property name="javax.persistence.jdbc.url"
-				value="jdbc:postgresql://localhost:5432/masterjoias?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8" />
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-			<property name="javax.persistence.jdbc.user" value="postgres" />
-			<property name="javax.persistence.jdbc.password" value="123456" /> -->
-
-			<!-- <property name="eclipselink.ddl-generation" value="drop-and-create-tables" 
-				/> -->
-			<!-- <property name="connection.datasource" value="java:/comp/env/jdbc/masterjoias"/> 
-			-->
-				
-<!-- 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" /> -->
-
-<!-- 			<property name="eclipselink.logging.level" value="ALL" /> -->
-			
-<!-- 		</properties> -->
-<!-- 		<properties> -->
-        <!-- <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/crude-tarefa" /> -->
-            <property name="javax.persistence.jdbc.url"
-                value="jdbc:mysql://10.42.0.105:3306/escala?createDatabaseIfNotExist=true" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="123" />
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-
-            <property name="javax.persistence.schema-generation.database.action"
-                value="update" /> <!-- drop-and-create -->
-            <property name="javax.persistence.schema-generation.create-source"
-                value="metadata" />
-
-            <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.format_sql" value="true" />
-            
-    	</properties> 
-	</persistence-unit>	
 </persistence>

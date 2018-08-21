@@ -1,6 +1,6 @@
 package br.com.sgeescala.model;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +19,7 @@ public class Escala extends Model<Escala>{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqidescala")
 	@SequenceGenerator(name = "seqidescala", sequenceName = "seqidescala", allocationSize = 1)
 	private Integer id;
-	private ArrayList<Equipe>subEquipe;
+	
 	
 	@Override
 	public Integer getId() {
@@ -33,12 +33,5 @@ public class Escala extends Model<Escala>{
 		this.id = id;
 	}
 
-	public ArrayList<Equipe> getSubEquipe() {
-		return subEquipe;
-	}
-
-	public void setSubEquipe(ArrayList<Equipe> subEquipe) {
-		this.subEquipe = subEquipe;
-	}
-
+	
 }

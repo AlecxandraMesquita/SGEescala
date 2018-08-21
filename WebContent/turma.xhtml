@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="template.xhtml">
+
+	<ui:define name="conteudo">
+	
+		<f:view>
+			<center>
+		
+				<h:form id="form">
+					<p:growl id="growl" showDetail="false" sticky="false"  life="5000" /> 
+					<p:panel id="panel" header="Cadastro de Turmas">
+						<p:panelGrid id="pgDados" columns="2" styleClass="semBorda">
+																	 
+							<p:inputText value="#{turmaController.entity.nome}" placeholder="Nome"/>
+														
+							<p:selectOneMenu id = "CorEquipe"
+								value = "#{turmaController.entity.cor}">
+								<f:selectItem itemLabel= "Cor da Turma" itemValue = ""/>
+								<f:selectItems value ="#{turmaController.cor}" var="st"
+									itemValue="#{st}" itemLabel = "#{st.nome}"/>
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<br/>
+						
+						<p:commandButton value="Incluir" 
+							actionListener="#{turmaController.insert}"
+							disabled="#{turmaController.entity.id != null}"
+							process="panel" update="form" />
+											
+						<p:commandButton value="Alterar" 
+							actionListener="#{turmaController.update}" 
+							disabled="#{turmaController.entity.id == null}"
+							process="panel" update="form" />
+				
+						<p:commandButton value="Excluir" 
+							actionListener="#{turmaController.delete}" 
+							disabled="#{turmaController.entity.id == null}"	
+							process="panel" update="form" />
+						
+						<p:commandButton value="Limpar" icon="" 
+							actionListener="#{turmaController.clean}" 
+							process="panel" update="form" />
+					</p:panel>
+						<br/>
+					<p:separator id="separator" />
+					<br/>
+					<p:dataTable  id="dataTable" 
+					value="#{turmaController.listaTurma}" var="objeto"
+						widgetVar="dataTableWV" >
+					<p:column>
+							<f:facet name="header">Nome</f:facet>
+	    				#{objeto.nome}
+	    		</p:column>
+						<p:column>
+							<f:facet name="header">Cor</f:facet>
+	    				#{objeto.cor}
+	    		</p:column>
+					
+					<p:column>
+							<f:facet name="header">Ação</f:facet>
+							<p:commandButton value="Editar" update="form" icon="fa fa-bug">
+								<f:setPropertyActionListener
+									target="#{turmaController.entity}" value="#{objeto}" />
+							</p:commandButton>
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">Lista Equipe</f:facet>
+							<p:commandButton value="Voluntários" icon="fa fa-bug"  action="equipe" >
+							<f:setPropertyActionListener
+									target="#{turmaController.entity}" value="#{objeto}" />
+							</p:commandButton>		
+
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</center>	
+		</f:view>
+	</ui:define>
+</ui:composition>
