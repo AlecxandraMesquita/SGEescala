@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.sgeescala.factory.JPAFactory;
+import br.com.sgeescala.model.Pessoa;
 import br.com.sgeescala.model.Voluntario;
 import br.com.sgeescala.repository.VoluntarioRepository;
 import br.unitins.frame.listController.ListController;

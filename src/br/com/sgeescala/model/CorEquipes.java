@@ -1,5 +1,6 @@
 package br.com.sgeescala.model;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,28 +10,30 @@ import javax.persistence.SequenceGenerator;
 import br.unitins.frame.model.Model;
 
 @Entity
-public class Turma extends Model<Turma>{
+public class CorEquipes extends Model<CorEquipes>{
 
-	private static final long serialVersionUID = 6855011554434601547L;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+//	private static final long serialVersionUID = -7478099533422424215L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqidturma")
-	@SequenceGenerator(name = "seqidturma", sequenceName = "seqidturma", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqidcorequipes")
+	@SequenceGenerator(name = "seqidcorequipes", sequenceName = "seqidcorequipes", allocationSize = 1)
+	
 	private Integer id;
 	private String nome;
-	private String cor;
-	
+	private String descricao;
 	
 	@Override
 	public Integer getId() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
 		this.id = id;
+		
 	}
 
 	public String getNome() {
@@ -41,13 +44,12 @@ public class Turma extends Model<Turma>{
 		this.nome = nome;
 	}
 
-	public String getCor() {
-		return cor;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setCor(String cor) {
-		this.cor = cor;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-
 
 }

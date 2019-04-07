@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/listings/templateListing.xhtml">
+	<ui:define name="titulo">Listagem de Turma</ui:define>
+	<ui:define name="conteudoCorpo">
+		<f:metadata>
+			<f:viewParam name="chave" value="#{turmaVoluntarioListController.chave}" />
+			<f:viewAction action="#{turmaVoluntarioListController.onLoad}" />
+		</f:metadata>
+		<h:form id="form">
+		<p:focus context="form" />
+			<h:panelGrid columns="2">
+				<p:inputText id="inputCor" value="#{turmaVoluntarioListController.entity.cor}"
+					style="width:520px; " />
+				<p:commandButton value="Pesquisar"  actionListener="#{turmaVoluntarioListController.search}" process="@this,inputCor" update="form"/>
+			</h:panelGrid>
+			<p:separator id="separator" />
+			
+			<p:dataTable id="dataTable" 
+				value="#{turmaVoluntarioListController.listEntity}"
+				emptyMessage="Nenhum registro encontrado" var="objeto" >
+				<p:ajax event="rowSelect"
+					listener="#{turmaVoluntarioListController.onRowSelect}"
+					update=":form:dataTable" />
+				<f:facet name="header">
+			         #{turmaVoluntarioListController.listEntity.size()} registro(s) encontrado(s)
+			    </f:facet>
+				<p:column >
+					<f:facet name="header">id</f:facet>
+					<h:outputText value="#{objeto.id}" />
+				</p:column>
+				<p:column >
+					<f:facet name="header">Nome Voluntário</f:facet>
+					<h:outputText value="#{objeto.voluntario.pessoa.nome}" />
+				</p:column>
+				<p:column >
+					<f:facet name="header">Cor Equipe</f:facet>
+					<h:outputText value="#{objeto.cor.nome}" />
+				</p:column>
+				<p:column style="width:60px;text-align: center">
+					<p:commandButton update=":form" icon="ui-icon-check" actionListener="#{turmaVoluntarioListController.onSelect(objeto)}" >
+						<f:setPropertyActionListener target="#{turmaVoluntarioListController.entity}" value="#{objeto}"  />
+					</p:commandButton>
+				</p:column>				
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

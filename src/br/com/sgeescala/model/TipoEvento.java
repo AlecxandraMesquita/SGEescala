@@ -1,20 +1,15 @@
 package br.com.sgeescala.model;
 
-public enum CorEquipe {
+public enum TipoEvento {
 
-	ROSA(0,"Rosa"),
-	LILAS(1,"Lilas"),
-	LARANJA(2,"Laranja"),
-	VERMELHO(3, "Vermelho"),
-	VERDE(4,"Verde"),
-	AZUL(5,"Azul"),
-	AMARELO(6,"Amarelo"),
-	PRETO(7,"Preto");
+	PADRAO(0,"Padrao"),
+	EXTRA(1,"Extra");
+	
 	
 	private Integer valor;
 	private String nome;
 	
-	private CorEquipe(Integer valor, String nome) {
+	private TipoEvento(Integer valor, String nome) {
 		this.valor = valor;
 		this.nome = nome;
 	}

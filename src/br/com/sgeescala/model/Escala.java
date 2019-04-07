@@ -1,5 +1,9 @@
 package br.com.sgeescala.model;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 //import java.util.ArrayList;
 
 import javax.persistence.Entity;
@@ -18,7 +22,11 @@ public class Escala extends Model<Escala>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqidescala")
 	@SequenceGenerator(name = "seqidescala", sequenceName = "seqidescala", allocationSize = 1)
+
 	private Integer id;
+	private Evento evento;
+	private CorEquipes corE;
+	private Voluntario voluntario; 
 	
 	
 	@Override
@@ -32,6 +40,28 @@ public class Escala extends Model<Escala>{
 		// TODO Auto-generated method stub
 		this.id = id;
 	}
-
 	
+	public Voluntario getVoluntario() {
+		return voluntario;
+	}
+
+	public void setVoluntario(Voluntario voluntario) {
+		this.voluntario = voluntario;
+	}
+	public CorEquipes getCorE() {
+		return corE;
+	}
+
+	public void setCorE(CorEquipes corE) {
+		this.corE = corE;
+	}
+	
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
 }

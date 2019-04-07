@@ -6,19 +6,18 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import br.com.sgeescala.factory.JPAFactory;
-import br.com.sgeescala.model.Turma;
-import br.com.sgeescala.repository.TurmaRepository;
+import br.com.sgeescala.model.Escala;
+import br.com.sgeescala.repository.EscalaRepository;
 import br.unitins.frame.application.ApplicationException;
 
-@FacesConverter(value = "EquipeConverter", forClass = Turma.class)
-public class EquipeConverter implements Converter {
-
+@FacesConverter(value = "EscalaConverter", forClass = Escala.class)
+public class EscalaConverter implements Converter {
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		TurmaRepository repository = new TurmaRepository(JPAFactory.getEntityManager());
+		EscalaRepository repository = new EscalaRepository(JPAFactory.getEntityManager());
 		try {
-			Turma f = ((Turma) repository.find(Integer.parseInt(arg2)));
-			return f;
+			Escala t = ((Escala) repository.find(Integer.parseInt(arg2)));
+			return t;
 		} catch (NumberFormatException | ApplicationException e) {
 			e.printStackTrace();
 		}
@@ -28,7 +27,7 @@ public class EquipeConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
 		if (arg2 != null) {
-			return ((Turma) arg2).getId() == null ? "" : ((Turma) arg2).getId().toString();
+			return ((Escala) arg2).getId() == null ? "" : ((Escala) arg2).getId().toString();
 		}
 		return "";
 	}

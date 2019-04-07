@@ -15,10 +15,10 @@ public class VoluntarioValidation implements Validation<Voluntario>{
 	public void validate(Voluntario t) throws ValidationException {
 		// TODO Auto-generated method stub
 		
-//		if (t.getSenha() == null || t.getSenha().equals(""))
-//			getlistMessages().add("A Senha deve ser informada!");
-//		if (t.getTipo() == null || t.getTipo().equals(""))
-//			getlistMessages().add("A Tipo deve ser informada!");				
+		if (t.getSenha() == null || t.getSenha().equals(""))
+			getlistMessages().add("A Senha deve ser informada!");
+		if (t.getTipo() == null || t.getTipo().equals(""))
+			getlistMessages().add("A Tipo deve ser informada!");				
 //		if (t.getCodIgreja() != 2);
 //			getlistMessages().add("Codigo não pertence a Sibapa!");		
 		if (getlistMessages().size() > 0)

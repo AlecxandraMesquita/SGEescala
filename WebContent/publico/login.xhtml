@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" template="template.xhtml">
+	xmlns:p="http://primefaces.org/ui" >
 
 <h:head>
 
@@ -28,7 +28,7 @@
 	</h:panelGroup>
 
 	<form id="login" method="post"
-		action="#{request.contextPath}/j_spring_security_check" >
+		action="#{request.contextPath}/j_spring_security_check" class="form-login">
 		<table class="tabela-login">
 			
 			<tr>
@@ -56,9 +56,9 @@
 	</form>
 	
 	
-            <h:form>
+            <h:form styleClass="form-rodape-login">
     
-                <p>2018 © Escala Trinhar</p>  
+                <p>2019 © Escala Trinhar</p>  
             </h:form>
 
 	

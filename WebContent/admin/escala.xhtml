@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/restrito/template.xhtml">
+
+	<ui:define name="conteudo">
+	
+		<f:view>
+			<center>
+		
+				<h:form id="form">
+					<p:growl id="growl" showDetail="false" sticky="false"  life="5000" /> 
+					<p:panel id="panel" header="Gerar Escala">
+						<p:panelGrid id="pgDados" columns="2" styleClass="semBorda">
+							
+							
+							<p:calendar id="inicio"
+
+								value="#{escalaController.inicio}" locale="pt_BR"
+								
+								pattern="dd/MM/yyyy" 
+								
+								timeZone="America/Araguaina" mask="true"
+								
+								placeholder="Data de Inicio" 
+						
+							/> 
+							
+							<p:calendar id="fim"
+
+								value="#{escalaController.fim}" locale="pt_BR"
+								
+								pattern="dd/MM/yyyy" 
+								
+								timeZone="America/Araguaina" mask="true"
+								
+								placeholder="Data do Fim" 
+						
+							/> 
+							
+							<p:selectOneMenu 
+								value = "#{escalaController.cor}">
+								<f:converter converterId = "CorEquipesConverter" />
+								<f:selectItem itemLabel= "Cor da Turma" />
+								<f:selectItems value ="#{escalaController.listaCor}" 
+								var="st" itemLabel = "#{st.nome}" itemValue="#{st}" />
+							</p:selectOneMenu>
+							
+						</p:panelGrid>	
+						<br/>
+							<p:commandButton value="Gerar" 
+								actionListener="#{escalaController.getGerarEscala}"
+								disabled="#{escalaController.entity.id != null}"
+								process="panel" update="form" />	
+					</p:panel>
+						<p:dataTable id="dataTable" value="#{escalaController.listaEscala}" var="objeto"
+							widgetVar="dataTableWV" >
+								
+								<p:column>
+									<f:facet name="header">Data</f:facet>
+				    				#{eventoController.convertData(objeto.evento.data)}
+					    		</p:column>
+								<p:column>
+									<f:facet name="header">Nome</f:facet>
+				    				#{objeto.voluntario.pessoa.nome}
+					    		</p:column>
+							
+								<p:column>
+									<f:facet name="header">Telefone</f:facet>
+					    				#{objeto.voluntario.pessoa.telefone}
+					    		</p:column>
+					    		
+						</p:dataTable> 				
+				</h:form>
+			</center>	
+		</f:view>
+	</ui:define>
+</ui:composition>

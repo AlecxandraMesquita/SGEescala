@@ -3,14 +3,14 @@ package br.com.sgeescala.validation;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.sgeescala.model.Turma;
+import br.com.sgeescala.model.TurmaVoluntario;
 import br.unitins.frame.application.ValidationException;
 import br.unitins.frame.validation.Validation;
 
-public class TurmaValidation implements Validation<Turma>{
+public class TurmaVoluntarioValidation implements Validation<TurmaVoluntario>{
 	List<String> listMessages;
 	@Override
-	public void validate(Turma t) throws ValidationException {
+	public void validate(TurmaVoluntario t) throws ValidationException {
 		// TODO Auto-generated method stub
 		
 		

@@ -1,6 +1,7 @@
 package br.com.sgeescala.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,8 +28,18 @@ public class Evento extends	Model<Evento> {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	private String nome;
+	private TipoEvento tipoEvento;
+	private List<TurmaVoluntario> listaTurmas;
 	
 	
+	public List<TurmaVoluntario> getListaTurmas() {
+		return listaTurmas;
+	}
+
+	public void setListaTurmas(List<TurmaVoluntario> list) {
+		this.listaTurmas = list;
+	}
+
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stubLocalTime
@@ -55,6 +66,14 @@ public class Evento extends	Model<Evento> {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public TipoEvento getTipoEvento() {
+		return tipoEvento;
+	}
+
+	public void setTipoEvento(TipoEvento tipoEvento) {
+		this.tipoEvento = tipoEvento;
 	}
 
 }

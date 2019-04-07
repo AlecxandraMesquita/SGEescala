@@ -8,6 +8,6 @@
 		maxWait="10000"
 		username="root" 
 		password="123" 
-		driverClassName="com.mysql.jdbc.Driver"
+		driverClassName="com.mysql.cj.jdbc.Driver"
 		url="jdbc:mysql://10.42.0.97:3306/escalaTrilhar?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8" />
-</Context>
+</Context><!-- driverClassName="com.mysql.jdbc.Driver" -->

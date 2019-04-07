@@ -30,11 +30,15 @@
 			         #{voluntarioListController.listEntity.size()} registro(s) encontrado(s)
 			    </f:facet>
 				<p:column >
+					<f:facet name="header">id</f:facet>
+					<h:outputText value="#{objeto.id}" />
+				</p:column>
+				<p:column >
 					<f:facet name="header">Nome</f:facet>
-					<h:outputText value="#{objeto.nome}" />
+					<h:outputText value="#{objeto.pessoa.nome}" />
 				</p:column>
 				<p:column style="width:60px;text-align: center">
-					<p:commandButton update=":form" icon="ui-icon-search" actionListener="#{voluntarioListController.onSelect(objeto)}" >
+					<p:commandButton update=":form" icon="ui-icon-check" actionListener="#{voluntarioListController.onSelect(objeto)}" >
 						<f:setPropertyActionListener target="#{voluntarioListController.entity}" value="#{objeto}"  />
 					</p:commandButton>
 				</p:column>				

@@ -2,7 +2,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" template="template.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/restrito/template.xhtml">
 
 	<ui:define name="conteudo">
 	
@@ -14,27 +14,13 @@
 					<p:panel id="panel" header="Cadastro de Voluntário">
 						<p:panelGrid id="pgDados" columns="2" styleClass="semBorda">
 																	 
-							<p:commandLink value="Nome:"
+							<p:commandLink value="Nome:" 
 								actionListener="#{voluntarioController.abrirListPessoa}">
 								<p:ajax event="dialogReturn" update="form" return="true"/>
 							</p:commandLink>
 
-							<p:inputText id="Nome" value="#{voluntarioController.entity.pessoa.nome}" placeholder="Nome" disabled="true"/>
-													 							
-							<p:selectOneMenu id = "Equipe"
-								value = "#{voluntarioController.entity.turma}">
-								<f:selectItem itemLabel= "Que Turma Pertence? " itemValue = ""/>
-								<f:selectItems value ="#{voluntarioController.listaTurma}" var="e"
-									itemValue="#{e}" itemLabel = "#{e.nome}"/>
-							</p:selectOneMenu>
-							
-							<p:selectOneMenu id = "Cor_Equipe"
-								value = "#{voluntarioController.entity.turma}">
-								<f:selectItem itemLabel= "Que Cor Pertence? " itemValue = ""/>
-								<f:selectItems value ="#{voluntarioController.listaTurma}" var="c"
-									itemValue="#{c}" itemLabel = "#{c.cor}"/>
-							</p:selectOneMenu>
-																	
+							<p:inputText value="#{voluntarioController.entity.pessoa.nome}" placeholder="Nome" disabled="true"/>
+										
 							<p:selectOneMenu id = "TipoVoluntario"
 								value = "#{voluntarioController.entity.tipo}">
 								<f:selectItem itemLabel= "Voluntario/Cordenador?" itemValue = ""/>
@@ -43,8 +29,26 @@
 							</p:selectOneMenu>
 							
 							<p:inputText value="#{voluntarioController.entity.senha}" placeholder="Senha"/>
-											
-													
+							
+					       <p:selectOneMenu id = "Disponibilidade"
+								value = "#{voluntarioController.entity.opcao}">
+								<f:selectItem itemLabel= "Selecione sua Disponibilidade?" itemValue = ""/>
+								<f:selectItems value ="#{voluntarioController.opcao}" var="st"
+									itemValue="#{st}" itemLabel = "#{st.nome}"/>
+							</p:selectOneMenu>
+							<p:selectOneMenu id = "status"
+								value = "#{voluntarioController.entity.status}">
+								<f:selectItem itemLabel= "Voluntari Ativo" itemValue = ""/>
+								<f:selectItems value ="#{voluntarioController.status}" var="st"
+									itemValue="#{st}" itemLabel = "#{st.nome}"/>
+							</p:selectOneMenu>
+							
+							<p:selectOneMenu id = "permissao"
+								value = "#{voluntarioController.entity.permissao}">
+								<f:selectItem itemLabel= "Permissão" itemValue = ""/>
+								<f:selectItems value ="#{voluntarioController.permissao}" var="p"
+									itemValue="#{p}" itemLabel = "#{p.nome}"/>
+							</p:selectOneMenu>
 									
 						</p:panelGrid>
 						<br/>
@@ -71,6 +75,31 @@
 						<br/>
 					<p:separator id="separator" />
 					<br/>
+					<p:dataTable  id="dataTable" 
+					value="#{voluntarioController.listaVoluntario}" var="objeto"
+						widgetVar="dataTableWV" >
+					<p:column>
+							<f:facet name="header">Nome</f:facet>
+	    				#{objeto.pessoa.nome}
+	    		</p:column>
+						<p:column>
+							<f:facet name="header">E-mail</f:facet>
+	    				#{objeto.pessoa.gmail}
+	    		</p:column>
+					<p:column>
+							<f:facet name="header">Telefone</f:facet>
+	    				#{objeto.pessoa.telefone}
+	    		</p:column>
+	    		
+					<p:column>
+							<f:facet name="header">Ação</f:facet>
+							<p:commandButton value="Editar" update="form" icon="fa fa-bug">
+								<f:setPropertyActionListener
+									target="#{voluntarioController.entity}" value="#{objeto}" />
+							</p:commandButton>
+						</p:column>
+						
+					</p:dataTable>
 					
 				</h:form>
 			</center>	

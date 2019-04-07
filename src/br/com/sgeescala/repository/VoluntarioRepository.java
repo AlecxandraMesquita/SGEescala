@@ -3,10 +3,12 @@ package br.com.sgeescala.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.sgeescala.model.TurmaVoluntario;
 import br.com.sgeescala.model.Voluntario;
 import br.unitins.frame.application.Session;
 import br.unitins.frame.application.Util;
@@ -16,19 +18,17 @@ public class VoluntarioRepository extends Repository<Voluntario>{
 
 	public VoluntarioRepository(EntityManager em) {
 		super(em);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected Class<Voluntario> getModelClass() {
-		// TODO Auto-generated method stub
 		return Voluntario.class;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Voluntario> bucarTodos() {
 		
-		Query query = geEntityManager().createQuery("Select f From Voluntario f Order by f.id Desc");
+		Query query = geEntityManager().createQuery("Select v From Voluntario v Order by v.id Desc");
 		List<Voluntario> lista = query.getResultList();
 		
 		if (lista == null)
@@ -38,7 +38,6 @@ public class VoluntarioRepository extends Repository<Voluntario>{
 	}
 	
 	public List<Voluntario> bucarVoluntarios(String nome) {
-		
 		Query query = geEntityManager().createQuery("SELECT f FROM Voluntario f WHERE f.pessoa.nome LIKE ?1 ORDER BY f.pessoa.nome");
 		query.setParameter(1, "%"+nome+"%");
 		List<Voluntario> lista = query.getResultList();
@@ -63,15 +62,9 @@ public class VoluntarioRepository extends Repository<Voluntario>{
 		return voluntario;
 	}
 	
-	public Voluntario buscarUVoluntarioPorCPF(String CPF) {
-		TypedQuery<Voluntario> query = geEntityManager().createQuery("SELECT f FROM Voluntario f WHERE f.pessoas.cpf = :CPF", Voluntario.class);
-
+	public Voluntario buscarVoluntarioPorCPF(String CPF) {
+		TypedQuery<Voluntario> query = geEntityManager().createQuery("SELECT v FROM Voluntario v WHERE v.pessoa.cpf = :CPF", Voluntario.class);
 		return query.setParameter("CPF", CPF).getSingleResult();
 	}
-	
-//Descomentar depois
-//	public void logout(ActionEvent actionEvent) {
-//		Session.encerrarSessao();
-//		Util.redirect("login.xhtml");
-//	}
+
 }

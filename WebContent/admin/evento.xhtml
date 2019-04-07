@@ -2,9 +2,11 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" template="template.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/restrito/template.xhtml">
 
 	<ui:define name="conteudo">
+	
+<!-- 	<script> PrimeFaces.locales['pt'] = { closeText: 'Fechar', prevText: 'Anterior', nextText: 'Próximo', currentText: 'Começo', monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'], monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'], dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'], dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'], dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'], weekHeader: 'Semana', firstDay: 0, isRTL: false, showMonthAfterYear: false, yearSuffix: '', timeOnlyTitle: 'Só Horas', timeText: 'Tempo', hourText: 'Hora', minuteText: 'Minuto', secondText: 'Segundo', ampm: false, month: 'Mês', week: 'Semana', day: 'Dia', allDayText: 'Todo o Dia' }; </script> -->
 	
 		<f:view>
 			<center>
@@ -18,15 +20,21 @@
 							
 						<p:calendar id="entrada"
 
-								value="#{eventoController.entity.data}" locale="br"
+								value="#{eventoController.entity.data}" locale="pt_BR"
 								
-								pattern="dd/MM/yyyy HH:mm:ss" 
+								pattern="dd/MM/yyyy" 
 								
 								timeZone="America/Araguaina" mask="true"
 								
 								placeholder="Data da entrada" 
 						
 							/> 
+							<p:selectOneMenu id = "TipoEvento"
+								value = "#{eventoController.entity.tipoEvento}">
+								<f:selectItem itemLabel= "Tipo de Evento" itemValue = ""/>
+								<f:selectItems value ="#{eventoController.tipoEvento}" var="st"
+									itemValue="#{st}" itemLabel = "#{st.nome}"/>
+							</p:selectOneMenu>
 							
 						</p:panelGrid>
 						<br/>
@@ -57,14 +65,18 @@
 					value="#{eventoController.listaEvento}" var="objeto" 
  						widgetVar="dataTableWV" >
  					<p:column>
- 							<f:facet name="header">Nome</f:facet>
- 	    				#{objeto.nome}
- 	    		</p:column>
- 						<p:column>
- 							<f:facet name="header">Data</f:facet>
+ 						<f:facet name="header">Nome</f:facet>
+ 	    					#{objeto.nome}
+ 	    			</p:column>
+ 	    			<p:column>
+ 						<f:facet name="header">Tipo Evento</f:facet>
+ 	    					#{objeto.tipoEvento}
+ 	    			</p:column>
+ 					<p:column>
+ 						<f:facet name="header">Data</f:facet>
 							#{eventoController.convertData(objeto.data)}
  	    				
- 	    		</p:column> 
+ 	    			</p:column> 
 					
  					<p:column> 
  							<f:facet name="header">Ação</f:facet> 

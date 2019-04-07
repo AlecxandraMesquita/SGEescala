@@ -10,10 +10,11 @@ import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 
 import br.com.sgeescala.factory.JPAFactory;
-import br.com.sgeescala.model.Turma;
+import br.com.sgeescala.model.TurmaVoluntario;
 import br.com.sgeescala.model.Evento;
+import br.com.sgeescala.model.TipoEvento;
 import br.com.sgeescala.model.Evento;
-import br.com.sgeescala.repository.TurmaRepository;
+import br.com.sgeescala.repository.TurmaVoluntarioRepository;
 import br.com.sgeescala.repository.EventoRepository;
 import br.com.sgeescala.validation.EventoValidation;
 import br.unitins.frame.controller.Controller;
@@ -63,6 +64,9 @@ public class EventoController extends Controller<Evento>{
 		// TODO Auto-generated method stub
 		this.listaEvento = listaEvento;
 	}
+	public TipoEvento[] getTipoEvento(){
+		return TipoEvento.values();
+    }
 	
 	
 	public String convertData(Date data) {
