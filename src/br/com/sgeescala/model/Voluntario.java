@@ -1,6 +1,10 @@
 package br.com.sgeescala.model;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+
+import org.eclipse.persistence.annotations.ConversionValue;
+import org.eclipse.persistence.annotations.ObjectTypeConverter;
+
 import br.unitins.frame.model.Model;
 
 @Entity
@@ -31,10 +39,30 @@ public class Voluntario extends Model<Voluntario>{
 	private Disponibilidade opcao;
 	private String senha;
 	private String nome;	
+
+	@ObjectTypeConverter( name = "permissao" , objectType = Permissao.class , dataType = String.class, conversionValues = {
+			 @ConversionValue( objectValue = "ROLE_COORDENADOR" , dataValue = "Administrador" ) ,
+			 @ConversionValue ( objectValue = "ROLE_CLIENTE" , dataValue = "Cliente" ) } ) 
+	
+	@Basic
+	@Convert  
 	@Enumerated(value = EnumType.STRING)
 	private Permissao permissao;
 	private Status status;
 	
+	public Permissao getPermissao() {
+		return permissao;
+	}
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao;
+	}
+	public Status getStatus() {
+		return status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	@Override
 	public Integer getId() {
 		return id;
@@ -94,18 +122,6 @@ public class Voluntario extends Model<Voluntario>{
 		this.opcao = opcao;
 	}
 
-	public Permissao getPermissao() {
-		return permissao;
-	}
-	public void setPermissao(Permissao permissao) {
-		this.permissao = permissao;
-	}
-	public Status getStatus() {
-		return status;
-	}
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
+	
 
 }

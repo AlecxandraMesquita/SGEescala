@@ -65,6 +65,7 @@ public class VoluntarioRepository extends Repository<Voluntario>{
 	public Voluntario buscarVoluntarioPorCPF(String CPF) {
 		TypedQuery<Voluntario> query = geEntityManager().createQuery("SELECT v FROM Voluntario v WHERE v.pessoa.cpf = :CPF", Voluntario.class);
 		return query.setParameter("CPF", CPF).getSingleResult();
+
 	}
 
 }

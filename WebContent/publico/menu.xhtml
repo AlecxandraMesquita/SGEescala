@@ -7,8 +7,8 @@
 	<div class="menu">
 		<h:form>
 			<p:menu toggleable="true">
-			
-				 <p:submenu label="#{voluntarioController.voluntarioLogado.pessoa.nome}"/>			
+
+				 <p:submenu label="#{voluntarioController.voluntarioLogado.pessoa.nome}"></p:submenu>			
 				 <p:submenu label="contato">
 					
 					<p:menuitem title="Entre em Contato"
@@ -20,7 +20,7 @@
 						actionListener="#{voluntarioController.logout}" title="Sair"
 						value="Sair" icon="fa fa-sign-out" />
 				</p:submenu>
-				
+
 				<p:submenu label="Menu">
 				
 					<p:menuitem value="Dashboard" ajax="false"
@@ -35,7 +35,6 @@
 						url="/admin/evento.xhtml" />
 					<p:menuitem value="Gerar Escala" ajax="false" icon="ui-icon-disk"
 						url="/admin/escala.xhtml" />	
-						
 					<p:menuitem value="Lista Turma_Voluntario" ajax="false" icon="ui-icon-disk"
 						url="/restrito/equipe.xhtml" />
 					

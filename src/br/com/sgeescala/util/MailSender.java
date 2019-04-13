@@ -12,9 +12,9 @@ import javax.mail.internet.MimeMessage;
 
 public class MailSender implements Serializable{
     
-	private static final long serialVersionUID = -7255911749030348405L;
+	//private static final long serialVersionUID = -7255911749030348405L;
 
-	//private static final long serialVersionUID = 3071144309847934479L;
+	private static final long serialVersionUID = 3071144309847934479L;
 
 	public  void sendMail(String fromMail,String username,String password,
             String toMail,String subject,String message) throws AddressException, MessagingException{

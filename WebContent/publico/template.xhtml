@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Escala Trilhar</title>
+</h:head>
+<h:body>
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="/images/ajaxloading.gif" />
+	</p:dialog>
+
+	<p:layout id="layout" fullPage="true">
+
+		<p:layoutUnit position="north">
+			<ui:insert name="cabecalho">
+				<center>
+					<h1 class="nome-do-sistema">Sistema Escala</h1>
+				</center>
+
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="200">
+			<ui:include src="menu.xhtml" />
+		</p:layoutUnit>
+		<!-- <div class="topo-geral">
+			<div class="ui-g topo">
+				<div class="ui-g-2"> -->
+					<!-- <p:graphicImage library="images" name="LogoGFE.png"
+						alt="Logo do sistema Escala" height="50px" /> -->
+				<!-- </div>
+				<div class="ui-g-8">
+					<center> <ui:include src="menu.xhtml" /> </center>
+				</div>
+				<div class="ui-g-2">
+					<h:form>
+						<p:menubar>
+
+							<p:submenu label="#{voluntarioController.voluntarioLogado.pessoa.nome}">
+
+								<p:menuitem title="Entre em Contato" action="/restrito/EnviarEmail.xhtml"
+									value="Entrar em contato" icon="fa fa-envelope" />
+								<p:separator />
+
+								<p:menuitem
+									onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
+									title="Sair" value="Sair" icon="fa fa-sign-out" />
+
+							</p:submenu>
+
+
+						</p:menubar>
+
+					</h:form>
+
+				</div>
+			</div>
+		</div> -->
+		<p:layoutUnit position="center">
+			<ui:insert name="conteudo" />
+		</p:layoutUnit>
+		
+
+		<p:layoutUnit position="south" size="30">
+			<p class="rodape-text">2017 © ESCALA DE VOLUNTARIOS TRILHAR. Todos os direitos
+				reservados</p>
+		</p:layoutUnit>
+
+	</p:layout>
+</h:body>
+</html>

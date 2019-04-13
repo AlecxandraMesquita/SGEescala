@@ -9,24 +9,26 @@
 
 	<http auto-config="true">
 	 
- 		<intercept-url pattern="/admin/**" access="ROLE_COODENADOR" />
-		<intercept-url pattern="/restrito/*" access="ROLE_COODENADOR, ROLE_CLIENTE"/>
-
+ 		<intercept-url pattern="admin/**" access="ROLE_COODENADOR" />
+		<intercept-url pattern="restrito/**" access="ROLE_COODENADOR, ROLE_CLIENTE"/>
+		
+		
 		<form-login
-			login-page="/j_spring_security_check"
+			login-page="/publico/login.jsp"
 			always-use-default-target="true" default-target-url="/restrito/dashboard.xhtml"
 			authentication-failure-url="/publico/login.xhtml?login_error=1" />
-			
-		<access-denied-handler error-page="/publico/acessoNegado.xhtml" /> 
-		<logout invalidate-session="true" logout-success-url="/index.xhtml" /> 
+		<access-denied-handler error-page="/publico/acessoNegado.xhtml" /> 					
+		<logout logout-success-url="/index.xhtml" /> 
 		<remember-me />
 	</http>
 
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="webDataSource"
-				authorities-by-username-query="SELECT p.cpf, v.permissao FROM 	VOLUNTARIO v, PESSOA p WHERE p.id = v.pessoa_id AND p.cpf = ?"
-				users-by-username-query="SELECT p.cpf, v.senha, (v.status = 0) as ativo FROM  VOLUNTARIO v,PESSOA p WHERE p.id = v.pessoa_id AND p.cpf = ?" />
+				users-by-username-query="SELECT p.cpf as username, v.senha as password, (v.status = 0) as ativo FROM  VOLUNTARIO v,PESSOA p WHERE p.id = v.pessoa_id AND p.cpf = ?"
+			
+				authorities-by-username-query="SELECT p.cpf as username, v.permissao FROM PESSOA p, VOLUNTARIO v WHERE p.id = v.pessoa_id AND p.cpf = ?"/>
+		
 		</authentication-provider>
 	</authentication-manager>
 </beans:beans> 

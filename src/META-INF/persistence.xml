@@ -9,12 +9,13 @@
 	
 		<non-jta-data-source>java:/comp/env/jdbc/escalaTrilhar</non-jta-data-source>
 		
-		<class>br.com.sgeescala.model.CorEquipes</class>
+		<class>br.com.sgeescala.model.Pessoa</class>
+		<class>br.com.sgeescala.model.Voluntario</class>
 		<class>br.com.sgeescala.model.TurmaVoluntario</class>
 		<class>br.com.sgeescala.model.Escala</class>
 		<class>br.com.sgeescala.model.Evento</class>
-		<class>br.com.sgeescala.model.Voluntario</class>
-		<class>br.com.sgeescala.model.Pessoa</class>
+		<class>br.com.sgeescala.model.CorEquipes</class>
+		
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />

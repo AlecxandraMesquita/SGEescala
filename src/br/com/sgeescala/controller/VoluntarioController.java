@@ -137,15 +137,6 @@ public class VoluntarioController extends Controller<Voluntario>{
 		});
 	}
 	
-	public Status[] getStatus(){
-		return Status.values();
-   }
-	
-	public Permissao[] getPermissao(){
-		return Permissao.values();
-    }
-
-	
 	public Voluntario getVoluntarioLogado() {
 		VoluntarioRepository repository = new VoluntarioRepository(JPAFactory.getEntityManager());
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -170,6 +161,14 @@ public class VoluntarioController extends Controller<Voluntario>{
 		this.listaTurma = listaTurma;
 	}
 
+	public Status[] getStatus(){
+		return Status.values();
+   }
+	
+	public Permissao[] getPermissao(){
+		return Permissao.values();
+    }
+	
 	public TipoVoluntario[] getTipo(){
 		return TipoVoluntario.values();
 	}
