@@ -19,58 +19,26 @@
 
 	<p:layout id="layout" fullPage="true">
 
-		<!-- <p:layoutUnit position="north">
+		<p:layoutUnit position="north">
 			<ui:insert name="cabecalho">
 				<center>
-					<h1 class="nome-do-sistema">Sistema Escala</h1>
+					<h1 class="nome-do-sistema">Sistema Escala Trilhar</h1>
 				</center>
-
+		
 			</ui:insert>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="west" size="200">
 			<ui:include src="menu.xhtml" />
-		</p:layoutUnit> -->
-		<div class="topo-geral">
-			<div class="ui-g topo">
-				<div class="ui-g-2">
-					<!-- <p:graphicImage library="images" name="LogoGFE.png"
-						alt="Logo do sistema Escala" height="50px" /> -->
-				</div>
-				<div class="ui-g-8">
-					<center> <ui:include src="menu.xhtml" /> </center>
-				</div>
-				<div class="ui-g-2">
-					<h:form>
-						<p:menubar>
+		</p:layoutUnit>
 
-							<p:submenu label="#{voluntarioController.voluntarioLogado.pessoa.nome}">
-
-								<p:menuitem title="Entre em Contato" action="/restrito/EnviarEmail.xhtml"
-									value="Entrar em contato" icon="fa fa-envelope" />
-								<p:separator />
-
-								<p:menuitem
-									onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
-									title="Sair" value="Sair" icon="fa fa-sign-out" />
-
-							</p:submenu>
-
-
-						</p:menubar>
-
-					</h:form>
-
-				</div>
-			</div>
-		</div>
 		<p:layoutUnit position="center">
 			<ui:insert name="conteudo" />
 		</p:layoutUnit>
 		
 
 		<p:layoutUnit position="south" size="30">
-			<p class="rodape-text">2017 © ESCALA DE VOLUNTARIOS TRILHAR. Todos os direitos
+			<p class="rodape-text">2019 © ESCALA TRILHAR. Todos os direitos
 				reservados</p>
 		</p:layoutUnit>
 

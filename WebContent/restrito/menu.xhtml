@@ -8,36 +8,21 @@
 		<h:form>
 			<p:menu toggleable="true">
 			
-				 <p:submenu label="#{voluntarioController.voluntarioLogado.pessoa.nome}"/>			
-				 <p:submenu label="contato">
-					
-					<p:menuitem title="Entre em Contato"
-						url="/publico/EnviarEmail.xhtml" value="Entrar em contato"
-						icon="fa fa-envelope" />
-					<p:separator />
-					<p:menuitem
-						onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
-						actionListener="#{voluntarioController.logout}" title="Sair"
-						value="Sair" icon="fa fa-sign-out" />
-				</p:submenu>
-				
 				<p:submenu label="Menu">
 				
-					<p:menuitem value="Dashboard" ajax="false"
-						url="/restrito/dashboard.xhtml" icon="fa fa-home" />
 					<p:menuitem value="Cadastro de Voluntario" ajax="false" icon="ui-icon-disk"
-						url="/admin/voluntario.xhtml" />
+						url="admin/voluntario.xhtml" />
 					<p:menuitem value="Cadastro de Equipe" ajax="false" icon="ui-icon-disk"
-						url="/admin/corequipes.xhtml" />
+						url="admin/corequipes.xhtml" />
 					<p:menuitem value="Cadastro de Turma" ajax="false" icon="ui-icon-disk"
-						url="/admin/turmavoluntario.xhtml" />
+						url="admin/turmavoluntario.xhtml" />
 					<p:menuitem value="Cadastro de Eventos" ajax="false" icon="ui-icon-disk"
-						url="/admin/evento.xhtml" />
+						url="admin/evento.xhtml" />
 					<p:menuitem value="Gerar Escala" ajax="false" icon="ui-icon-disk"
-						url="/admin/escala.xhtml" />	
+						url="admin/escala.xhtml" />	
 						
 					<p:menuitem value="Lista Turma_Voluntario" ajax="false" icon="ui-icon-disk"
-						url="/restrito/equipe.xhtml" />
+						url="restrito/equipe.xhtml" />
 					
 				</p:submenu>	
 

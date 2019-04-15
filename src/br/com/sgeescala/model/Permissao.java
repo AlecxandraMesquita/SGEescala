@@ -1,5 +1,6 @@
 package br.com.sgeescala.model;
 
+
 public enum Permissao {
 	ROLE_COODENADOR("Administrador"),
 	ROLE_CLIENTE("Cliente");
