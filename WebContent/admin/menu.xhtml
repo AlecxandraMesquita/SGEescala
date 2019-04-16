@@ -7,7 +7,17 @@
 	<div class="menu">
 		<h:form>
 			<p:menu toggleable="true">
-			
+				<p:submenu label="#{voluntarioController.voluntarioLogado.pessoa.nome}">				
+					
+					<p:menuitem title="Entre em Contato"
+						url="/publico/EnviarEmail.xhtml" value="Entrar em contato"
+						icon="fa fa-envelope" />
+					<p:separator />
+					<p:menuitem
+						onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
+						actionListener="#{voluntarioController.logout}" title="Sair"
+						value="Sair" icon="fa fa-sign-out" />
+				</p:submenu>
 				<p:submenu label="Menu">
 				
 					<p:menuitem value="Cadastro de Voluntario" ajax="false" icon="ui-icon-disk"
