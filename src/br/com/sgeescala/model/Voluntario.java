@@ -36,13 +36,6 @@ public class Voluntario extends Model<Voluntario>{
 	private Disponibilidade opcao;
 	private String senha;
 	private String nome;	
-
-//	@ObjectTypeConverter( name = "permissao" , objectType = Permissao.class , dataType = String.class, conversionValues = {
-//			 @ConversionValue( objectValue = "ROLE_COORDENADOR" , dataValue = "Administrador" ) ,
-//			 @ConversionValue ( objectValue = "ROLE_CLIENTE" , dataValue = "Cliente" ) } ) 
-//	
-	@Basic
-	@Convert  
 	@Enumerated(value = EnumType.STRING)
 	private Permissao permissao;
 	private Status status;

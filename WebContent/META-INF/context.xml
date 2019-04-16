@@ -9,6 +9,6 @@
 		username="root" 
 		password="123" 
 		driverClassName="com.mysql.cj.jdbc.Driver"
-		url="jdbc:mysql://10.42.0.97:3306/escalaTrilhar?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8" />
+		url="jdbc:mysql://127.0.0.1:3306/escalaTrilhar?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8" />
 		<!-- driverClassName="com.mysql.jdbc.Driver" -->
 </Context>

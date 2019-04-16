@@ -26,13 +26,12 @@ version="3.1">
   	<!-- 	 DataSource  -->
 
 	<resource-ref>
-		<description>DataSource MasterJoias</description>
-		<res-ref-name>jdbc/masterjoias</res-ref-name>
+		<description>DataSource escalaTrilhar</description>
+		<res-ref-name>jdbc/escalaTrilhar</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
-  
-  	 <!--  Spring Security -->   
+   <!--  Spring Security -->   
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -60,6 +59,4 @@ version="3.1">
 		<welcome-file>publico/login.xhtml</welcome-file>
 	</welcome-file-list> 
 	
-	
-  
 </web-app>
