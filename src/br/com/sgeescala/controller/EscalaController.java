@@ -9,23 +9,28 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 
-import org.eclipse.persistence.internal.jpa.metamodel.proxy.ListAttributeProxyImpl;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
-import org.omg.PortableInterceptor.Interceptor;
+import org.springframework.jdbc.object.UpdatableSqlQuery;
+
+import com.mysql.cj.jdbc.result.UpdatableResultSet;
 
 import br.com.sgeescala.factory.JPAFactory;
+import br.com.sgeescala.list.controller.EventoListController;
+import br.com.sgeescala.list.controller.VoluntarioListController;
 import br.com.sgeescala.model.CorEquipes;
 import br.com.sgeescala.model.Escala;
 import br.com.sgeescala.model.Evento;
-import br.com.sgeescala.model.TipoEvento;
-import br.com.sgeescala.model.TurmaVoluntario;
 import br.com.sgeescala.model.Voluntario;
 import br.com.sgeescala.repository.CorEquipesRepository;
 import br.com.sgeescala.repository.EscalaRepository;
 import br.com.sgeescala.repository.EventoRepository;
 import br.com.sgeescala.repository.TurmaVoluntarioRepository;
+import br.com.sgeescala.repository.VoluntarioRepository;
 import br.com.sgeescala.validation.EscalaValidation;
+import br.unitins.frame.application.ApplicationException;
+import br.unitins.frame.application.SelectionListener;
+import br.unitins.frame.application.ValidationException;
 import br.unitins.frame.controller.Controller;
 import br.unitins.frame.validation.Validation;
 
@@ -34,14 +39,17 @@ import br.unitins.frame.validation.Validation;
 public class EscalaController extends Controller<Escala>{
 
 	private List<Escala> listaEscala;
-//	private List<TurmaVoluntario> listaTurma;
+	private List<Voluntario> listaVoluntario;
 	private List<Evento> listaEvento;
 	private List<CorEquipes> listaCor;
 	private Date inicio;
 	private Date fim;
 	private CorEquipes cor;
-	private Voluntario voluntario;
-
+	private Escala voluntario;
+	private Escala escala;
+	private Evento evento;
+	private Evento evento2;
+	
 	@Override
 	protected EntityManager getEntityManager() {
 		return JPAFactory.getEntityManager();
@@ -51,10 +59,27 @@ public class EscalaController extends Controller<Escala>{
 	public Escala getEntity() {
 		if(entity == null) {
 			entity = new Escala();
-			
+		}
+		if(entity.getVoluntario()== null) {
 			entity.setVoluntario(new Voluntario());
 		}
+		if(entity.getEvento()== null) {
+			entity.setEvento(new Evento());
+		}
 		return entity;	
+	}
+	
+	public Escala getEscala() {
+		if(escala == null) {
+			escala = new Escala();
+		}
+		if(escala.getVoluntario()== null) {
+			escala.setVoluntario(new Voluntario());
+		}
+		if(escala.getEvento()== null) {
+			escala.setEvento(new Evento());
+		}
+		return escala;	
 	}
 	
 	@Override
@@ -93,23 +118,12 @@ public class EscalaController extends Controller<Escala>{
 		this.listaEvento = listaEvento;
 	}
 
-	public void trocaMembroEscala() {
-		
-	}
-//	public List<TurmaVoluntario> getListaTurmaCores(){
-//		if(listaTurma == null) {
-//			TurmaVoluntarioController turmas = new TurmaVoluntarioController();
-//			TurmaVoluntarioRepository repositoryt = new TurmaVoluntarioRepository(JPAFactory.getEntityManager());
-//			listaTurma = repositoryt.buscarTurmaCor(turmas.getEntity().getCor().getId());
-//		}
-//		return listaTurma;
-//	}
 	public void getGerarEscala(ActionEvent actionEvent) {
 		//chama a lista de eventos
 		EventoRepository eventoRep = new EventoRepository(JPAFactory.getEntityManager());
 		listaEvento = eventoRep.buscarEventos(inicio,fim);
 		
-		CorEquipesController grupoCores = new CorEquipesController();
+		//CorEquipesController grupoCores = new CorEquipesController();
 		TurmaVoluntarioRepository repository = new TurmaVoluntarioRepository(JPAFactory.getEntityManager());
 		List<Voluntario> listaVoluntario = repository.buscarVoluntarioCor(cor);
 		List<Voluntario> equipeA = new ArrayList<Voluntario>();
@@ -243,7 +257,77 @@ public class EscalaController extends Controller<Escala>{
 			
 		}
 	}
+	
+	public void getTrocaEscala(ActionEvent actionEvent) throws OptimisticLockException, ValidationException, ApplicationException {
+		EscalaRepository repository = new EscalaRepository(JPAFactory.getEntityManager());
+		Integer idVoluntario = getEntity().getVoluntario().getId();
+		Integer idVoluntario2 = getEscala().getVoluntario().getId();
+//		Integer idEntity = getEntity().getId();
+//		Integer idEscala = getEscala().getId();
+		repository.trocaEscala(getEntity(),idVoluntario2);
+//		UpdatableResultSet("update ESCALA set VOLUNTARIO_ID = "+idVoluntario2+"  where ID = "+idEntity);
+		repository.trocaEscala(getEscala(),idVoluntario);
+//		UpdatableResultSet("update ESCALA set VOLUNTARIO_ID = "+idVoluntario+"  where ID = "+idEscala);
+//		Voluntario voluntario = getEntity().getVoluntario();
+//		getEntity().setVoluntario(getEscala().getVoluntario());
+//		repository.save(entity);
+//		getEscala().setVoluntario(voluntario);
+//		repository.save(escala);
+		System.out.println("id 1"+ idVoluntario);
+		System.out.println("id 2"+ idVoluntario2);
+		System.out.println("idEntity 1"+ getEntity().getVoluntario().getPessoa().getNome());
+		System.out.println("idEscala 2"+ getEscala().getVoluntario().getPessoa().getNome());
+	}
 
+	
+	private void UpdatableResultSet(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void abrirListVoluntario(ActionEvent actionEvent) {
+		VoluntarioListController list = new VoluntarioListController();
+		list.openList(new SelectionListener<Voluntario>() {
+			@Override
+			public void select(Voluntario entity) {
+			  	getEntity().setVoluntario(entity);
+			}
+		});
+	}
+	
+	public void abrirListVoluntario2(ActionEvent actionEvent) {
+		VoluntarioListController list2 = new VoluntarioListController();
+		list2.openList(new SelectionListener<Voluntario>() {
+			@Override
+			public void select(Voluntario voluntario2) {
+				getEscala().setVoluntario(voluntario2);
+			}
+		});
+	}
+	
+	public void abrirListEvento(ActionEvent actionEvent) {
+		EventoListController list2 = new EventoListController(getEntity().getVoluntario());
+		list2.openList(new SelectionListener<Evento>() {
+			@Override
+			public void select(Evento evento) {
+				EscalaRepository rep = new EscalaRepository(JPAFactory.getEntityManager());
+				setEntity(rep.buscarEscalaPorVoluntarioAndEvento(getEntity().getVoluntario().getId(), evento.getId()));
+				
+			}
+		});
+	}
+	
+	public void abrirListEvento2(ActionEvent actionEvent) {
+		EventoListController list2 = new EventoListController(getEscala().getVoluntario());
+		list2.openList(new SelectionListener<Evento>() {
+			@Override
+			public void select(Evento evento) {
+				EscalaRepository rep = new EscalaRepository(JPAFactory.getEntityManager());
+				escala = rep.buscarEscalaPorVoluntarioAndEvento(getEscala().getVoluntario().getId(), evento.getId());
+			}
+		});
+	}
+	
 	public Date getInicio() {
 		return inicio;
 	}
@@ -271,7 +355,14 @@ public class EscalaController extends Controller<Escala>{
 	public void setListaCor(List<CorEquipes> listaCor) {
 		this.listaCor = listaCor;
 	}
-
+	
+	public void buscaEscalaByCor(ActionEvent actionEvent) {
+		System.out.println("Entrou ");
+		EscalaRepository repository = new EscalaRepository(JPAFactory.getEntityManager());
+		listaEscala = repository.buscarEscalaCor(getEntity().getCorE().getId());
+		System.out.println("saiu ");
+	}
+	
 	public CorEquipes getCor() {
 		return cor;
 	}
@@ -280,11 +371,26 @@ public class EscalaController extends Controller<Escala>{
 		this.cor = cor;
 	}
 
-	public Voluntario getVoluntario() {
+	public Escala getVoluntario() {
 		return voluntario;
 	}
 
-	public void setVoluntario(Voluntario voluntario) {
+	public void setVoluntario(Escala voluntario) {
 		this.voluntario = voluntario;
+	}
+	
+
+	public List<Voluntario> getListaVoluntario() {
+		if(listaVoluntario == null) {
+			VoluntarioRepository repository = new VoluntarioRepository(JPAFactory.getEntityManager());
+			listaVoluntario = repository.bucarTodos();
+		}
+	
+		
+		return listaVoluntario;
+	}
+
+	public void setListaVoluntario(List<Voluntario> listaVoluntario) {
+		this.listaVoluntario = listaVoluntario;
 	}
 }

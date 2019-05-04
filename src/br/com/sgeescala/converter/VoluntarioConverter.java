@@ -10,7 +10,7 @@ import br.com.sgeescala.model.Voluntario;
 import br.com.sgeescala.repository.VoluntarioRepository;
 import br.unitins.frame.application.ApplicationException;
 
-@FacesConverter(value = "voluntarioConverter", forClass = Voluntario.class)
+@FacesConverter(value = "VoluntarioConverter", forClass = Voluntario.class)
 public class VoluntarioConverter implements Converter {
 
 	@Override

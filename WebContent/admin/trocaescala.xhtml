@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="template.xhtml">
+
+	<ui:define name="conteudo">
+	
+		<f:view>	
+			<center>
+		
+				<h:form id="form">
+					<p:growl id="growl" showDetail="false" sticky="false"  life="5000" /> 
+					<p:panel id="panel" header="Cadastro de Turmas">
+						<p:panelGrid id="pgDados" columns="2" styleClass="semBorda">	
+							
+							<p:commandLink value="NomeVoluntario:" 
+								actionListener="#{escalaController.abrirListVoluntario}">
+								<p:ajax event="dialogReturn" update="form" return="true"/>
+							</p:commandLink>
+
+							<p:inputText value="#{escalaController.entity.voluntario.pessoa.nome}" 
+							placeholder="Nome do Voluntario" disabled="true"/>
+					 		
+					 		<p:commandLink value="Evento1:" 
+								actionListener="#{escalaController.abrirListEvento}"
+								disabled="#{escalaController.entity.voluntario.pessoa.id == null}">
+								<p:ajax event="dialogReturn" update="form" return="true"/>
+							</p:commandLink>
+
+							<p:inputText value="#{escalaController.entity.evento.nome}" 
+							placeholder="Nome do Evento" disabled="true"/>
+					 
+					 		
+					 		<p:commandLink value="NomeVoluntario2:" 
+								actionListener="#{escalaController.abrirListVoluntario2}"
+								disabled="#{escalaController.entity.evento.id == null}">
+								<p:ajax event="dialogReturn" update="form" return="true"/>
+							</p:commandLink>
+
+							<p:inputText value="#{escalaController.escala.voluntario.pessoa.nome}" 
+							placeholder="Nome do Voluntario 2" disabled="true"/>
+					 
+							 <p:commandLink value="NomeEvento2:" 
+								actionListener="#{escalaController.abrirListEvento2}" 
+								disabled="#{escalaController.escala.voluntario.pessoa.id == null}">
+								<p:ajax event="dialogReturn" update="form" return="true"/>
+							</p:commandLink>
+
+							<p:inputText value="#{escalaController.escala.evento.nome}" 
+							placeholder="Nome do Evento 2" disabled="true"/>
+					 
+							
+							
+						</p:panelGrid>
+						<br/>
+	
+						<p:commandButton value="Trocar" 
+								actionListener="#{escalaController.getTrocaEscala}"
+								disabled="#{escalaController.escala.evento.id == null}"
+								process="panel" update="form" />
+								
+				
+					</p:panel>
+				 				
+			
+				</h:form>
+				
+			</center>	
+		</f:view>
+	</ui:define>
+</ui:composition>

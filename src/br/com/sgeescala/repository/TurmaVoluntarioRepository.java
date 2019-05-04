@@ -108,7 +108,7 @@ public class TurmaVoluntarioRepository extends Repository<TurmaVoluntario>{
 	
 	
 	
-	
+//	
 //	public List<TurmaVoluntario>  buscarVoluntarioCor(CorEquipes cor) {
 //		String sql = "SELECT tv.voluntario FROM TurmaVoluntario tv ";
 //		if (cor != null ) {		

@@ -11,6 +11,7 @@ import javax.persistence.TemporalType;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import br.com.sgeescala.model.Evento;
+import br.com.sgeescala.model.Voluntario;
 import br.unitins.frame.repository.Repository;
 
 public class EventoRepository extends Repository<Evento>{
@@ -66,16 +67,41 @@ public class EventoRepository extends Repository<Evento>{
 		return lista;
 
 	}
-	
-//	public List<Evento> buscarTipoEventos() {
-//		// TODO Auto-generated method stub
-//		Query query = geEntityManager().createQuery("Select e From Evento e  WHERE e.data between :inicioDate and :fimDate");
-//		List<Evento>lista = query.getResultList();
-//
-//		if (lista == null)
-//			lista = new ArrayList<Evento>();
-//
-//		return lista;
-//
-//	}
+	public Evento buscarEventoData(Date data) {
+		// TODO Auto-generated method stub
+		Query query = geEntityManager().createQuery("Select e From Evento e  WHERE e.data = :data");
+		query.setParameter("data", data, TemporalType.DATE);
+		Evento evento = (Evento) query.getSingleResult();
+
+		
+		return evento;
+
+	}
+
+	public List<Evento> buscarEventosPorVoluntario(Voluntario voluntario) {
+		// TODO Auto-generated method stub
+		Query query = geEntityManager().createQuery("Select e.evento From Escala e WHERE e.voluntario.id = ?1 ORDER BY e.evento.nome");
+		query.setParameter(1, voluntario.getId());
+		List<Evento>lista = query.getResultList();
+
+		if (lista == null)
+			lista = new ArrayList<Evento>();
+
+		return lista;
+
+	}
+	public List<Evento> buscarEventosPorVoluntarioData(Voluntario voluntario, Date data) {
+		// TODO Auto-generated method stub
+		Query query = geEntityManager().createQuery("Select e.evento From Escala e WHERE e.voluntario.id = :idVoluntario AND e.evento.data = :data ");
+//		query.setParameter(1, voluntario.getId());
+		query.setParameter("idVoluntario", voluntario.getId());
+		query.setParameter("data", data, TemporalType.DATE);
+		List<Evento>lista = query.getResultList();
+
+		if (lista == null)
+			lista = new ArrayList<Evento>();
+
+		return lista;
+
+	}
 }

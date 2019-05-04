@@ -18,8 +18,7 @@
 						actionListener="#{voluntarioController.logout}" title="Sair"
 						value="Sair" icon="fa fa-sign-out" />
 				</p:submenu>
-				<p:submenu label="Menu">
-											
+				<p:submenu label="Menu Admin">
 					<p:menuitem value="Cadastro de Voluntario" ajax="false" icon="ui-icon-disk"
 						url="/admin/voluntario.xhtml" />
 					<p:menuitem value="Cadastro de Equipe" ajax="false" icon="ui-icon-disk"
@@ -29,10 +28,17 @@
 					<p:menuitem value="Cadastro de Eventos" ajax="false" icon="ui-icon-disk"
 						url="/admin/evento.xhtml" />
 					<p:menuitem value="Gerar Escala" ajax="false" icon="ui-icon-disk"
-						url="/admin/escala.xhtml" />
-							
+						url="/admin/escala.xhtml" />	
+					<p:menuitem value="Troca Escala" ajax="false" icon="ui-icon-disk"
+						url="/admin/trocaescala.xhtml" />	
+					
+				</p:submenu>
+				<p:submenu label="Menu Cliente">
+					<p:menuitem value="Lista Escala Turma" ajax="false" icon="ui-icon-disk"
+						url="/restrito/listaescalacor.xhtml" />	
 					<p:menuitem value="Lista Turma_Voluntario" ajax="false" icon="ui-icon-disk"
-						url="/restito/equipe.xhtml" />
+						url="/restrito/equipe.xhtml" />
+					
 				</p:submenu>	
 
  			</p:menu>
