@@ -29,9 +29,12 @@ import br.com.sgeescala.repository.TurmaVoluntarioRepository;
 import br.com.sgeescala.repository.VoluntarioRepository;
 import br.com.sgeescala.validation.EscalaValidation;
 import br.unitins.frame.application.ApplicationException;
+import br.unitins.frame.application.Config;
 import br.unitins.frame.application.SelectionListener;
+import br.unitins.frame.application.Util;
 import br.unitins.frame.application.ValidationException;
 import br.unitins.frame.controller.Controller;
+import br.unitins.frame.repository.Repository;
 import br.unitins.frame.validation.Validation;
 
 @ManagedBean
@@ -87,6 +90,11 @@ public class EscalaController extends Controller<Escala>{
 		super.clean(actionEvent);
 		setListaEscala(null);
 	}
+	
+	public void cleanEscala (Escala escala) {
+		setEntity(null);
+	}
+	
 
 	@Override
 	public Validation<Escala> getValidation() {
@@ -258,30 +266,16 @@ public class EscalaController extends Controller<Escala>{
 		}
 	}
 	
-	public void getTrocaEscala(ActionEvent actionEvent) throws OptimisticLockException, ValidationException, ApplicationException {
-		EscalaRepository repository = new EscalaRepository(JPAFactory.getEntityManager());
-		Integer idVoluntario = getEntity().getVoluntario().getId();
-		Integer idVoluntario2 = getEscala().getVoluntario().getId();
-//		Integer idEntity = getEntity().getId();
-//		Integer idEscala = getEscala().getId();
-		repository.trocaEscala(getEntity(),idVoluntario2);
-//		UpdatableResultSet("update ESCALA set VOLUNTARIO_ID = "+idVoluntario2+"  where ID = "+idEntity);
-		repository.trocaEscala(getEscala(),idVoluntario);
-//		UpdatableResultSet("update ESCALA set VOLUNTARIO_ID = "+idVoluntario+"  where ID = "+idEscala);
-//		Voluntario voluntario = getEntity().getVoluntario();
-//		getEntity().setVoluntario(getEscala().getVoluntario());
-//		repository.save(entity);
-//		getEscala().setVoluntario(voluntario);
-//		repository.save(escala);
-		System.out.println("id 1"+ idVoluntario);
-		System.out.println("id 2"+ idVoluntario2);
-		System.out.println("idEntity 1"+ getEntity().getVoluntario().getPessoa().getNome());
-		System.out.println("idEscala 2"+ getEscala().getVoluntario().getPessoa().getNome());
-	}
+	public void getTrocaEscala(ActionEvent actionEvent) throws OptimisticLockException, ValidationException, ApplicationException{
+		EscalaRepository repository = new EscalaRepository(JPAFactory.getEntityManager());		
 
-	
-	private void UpdatableResultSet(String string) {
-		// TODO Auto-generated method stub
+		Voluntario voluntario = getEscala().getVoluntario();
+
+		getEscala().setVoluntario(getEntity().getVoluntario());
+		getEntity().setVoluntario(voluntario);	
+		update(actionEvent);
+		setEntity(getEscala());
+		update(actionEvent);
 		
 	}
 

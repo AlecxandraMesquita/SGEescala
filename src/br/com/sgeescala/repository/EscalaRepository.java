@@ -5,11 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.event.ActionEvent;
+import javax.persistence.Embeddable;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
+import br.com.sgeescala.controller.VoluntarioController;
 import br.com.sgeescala.model.Escala;
 import br.com.sgeescala.model.Evento;
 import br.com.sgeescala.model.TurmaVoluntario;
@@ -85,18 +87,30 @@ public class EscalaRepository extends Repository<Escala> {
 	
 	public void trocaEscala(Escala escala, Integer idVoluntario) {
 //		Query query = geEntityManager().createNativeQuery("update ESCALA set VOLUNTARIO_ID ="+idVoluntario+" where ID = "+escala.getId());
-		Query query = geEntityManager().createNativeQuery("update ESCALA set VOLUNTARIO_ID = :idVoluntario  where ID = :idEscala");
+		Query query = geEntityManager().createNativeQuery("update ESCALA set VOLUNTARIO_ID = :idVoluntario  where ID = :idEscala", Escala.class);
 		query.setParameter("idVoluntario",idVoluntario);
 		query.setParameter("idEscala", escala.getId());
+		System.out.println("query "+query.executeUpdate());
+//		query.executeUpdate();
+//		Escala troca = null;
+//		try {
+//			troca = (Escala) query.getSingleResult();	
+//		} catch (javax.persistence.NoResultException exception) {
+//			
+//		}
 		System.out.println("query "+query);
 //		geEntityManager().getTransaction().commit();
 	}
 	
 	
 	@SuppressWarnings("uncheckd")
-	public Escala trocaEscala2(Integer id, Integer idvolu) {
-//		Query query = geEntityManager().createQuery("delete ESCALA from ESCALA where id = ?1 ");
-		Query query = geEntityManager().createQuery("UPDATE Escala es SET es.voluntario.id = :idVoluntario WHERE es.id = :idEscala");	
+	public Escala trocaEscala2(Escala escala) {
+		
+		
+		int idvolu = escala.getVoluntario().getId();
+		int id = escala.getId();
+	
+		Query query = geEntityManager().createQuery("UPDATE Escala es SET es.voluntario.id = :idVoluntario WHERE es.id = :idEscala ");	
 		query.setParameter("idVoluntario", idvolu);
 		query.setParameter("idEscala", id);
 		
@@ -107,9 +121,10 @@ public class EscalaRepository extends Repository<Escala> {
 			
 		}
 	
-		return troca;
-		
+		return troca;		
 	}
+	
+
 	public List<Escala>  buscarEscalaCor(Integer id) {
 
 		Query query = geEntityManager().createQuery("SELECT es FROM Escala es WHERE es.corE.id = ?1 ORDER BY es.voluntario.pessoa.nome");
