@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportEscala" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d61d02c-7886-4137-8b49-0ad89e6158ee">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Relatorio_Escala"/>
+	<queryString language="SQL">
+		<![CDATA[select `escalaTrilhar`.`COREQUIPES`.`NOME`,
+	`escalaTrilhar`.`EVENTO`.`DATA`,
+	`escalaTrilhar`.`PESSOA`.`NOME`
+FROM `escalaTrilhar`.`COREQUIPES`,
+	`escalaTrilhar`.`EVENTO`,
+	`escalaTrilhar`.`PESSOA`,
+	`escalaTrilhar`.`VOLUNTARIO`,
+	`escalaTrilhar`.`ESCALA`
+WHERE  `escalaTrilhar`.`COREQUIPES`.`ID`=`escalaTrilhar`.`ESCALA`.`CORE_ID` 
+AND `escalaTrilhar`.`EVENTO`.`ID` =  `escalaTrilhar`.`ESCALA`.`EVENTO_ID` 
+AND `escalaTrilhar`.`VOLUNTARIO`.`ID` =  `escalaTrilhar`.`ESCALA`.`VOLUNTARIO_ID` 
+AND  `escalaTrilhar`.`PESSOA`.`ID` = `escalaTrilhar`.`VOLUNTARIO`.`PESSOA_ID`]]>
+	</queryString>
+	<field name="NOME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="COREQUIPES"/>
+	</field>
+	<field name="DATA" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="DATA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="EVENTO"/>
+	</field>
+	<field name="COLUMN_3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PESSOA"/>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{DATA}]]></groupExpression>
+		<groupHeader>
+			<band height="33">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="4be736dc-2836-472d-a270-36932b4a6861"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Data Escala]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="100" y="0" width="455" height="32" forecolor="#006699" backcolor="#E6E6E6" uuid="74bd7e8c-388f-4fc8-8a38-297f81f65106"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DATA}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="6fc389c6-32d0-46cb-a8ea-61a011a5f0a2"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{COLUMN_3}]]></groupExpression>
+		<groupHeader>
+			<band height="32">
+				<textField>
+					<reportElement x="110" y="0" width="445" height="32" forecolor="#006699" uuid="57e42c88-669e-48ca-b354-85eae666c059"/>
+					<textElement>
+						<font size="20" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="110" height="20" forecolor="#666666" uuid="2b89c1c5-c563-4e5d-b3ef-063a4552d664"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nome_Voluntario]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="89">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-21" width="595" height="110" backcolor="#006699" uuid="73a5062e-51e0-42f4-9519-3102d87a3f44"/>
+				<staticText>
+					<reportElement x="20" y="19" width="555" height="43" forecolor="#FFFFFF" uuid="8a4dca74-9d84-4e5a-b003-5549b25e47f5"/>
+					<textElement textAlignment="Center">
+						<font size="30" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Relatório de Escala]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="60" width="180" height="20" forecolor="#FFFFFF" uuid="f59201b2-b4c4-4def-9f0e-35cac52e1042"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Escala Trilhar]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="245" y="82" width="150" height="30" forecolor="#FFFFFF" uuid="27821a56-c151-46c7-9e9b-e7534471af71"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NOME}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="142" y="82" width="100" height="30" forecolor="#FFFFFF" uuid="a5dda9b6-d36c-4a3e-b35c-3bc03556f34e"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Equipe: "]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="1901a58c-86db-4066-9afd-0836b308da96"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="6b956be3-c075-4fb6-bfa9-176930e16eb1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="57523bbd-255b-4463-8d6f-85951e44f419"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="bae82b2e-6190-484a-a7ec-7ad4a498692b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="f1d5c14d-8e1a-4841-b0be-90b54d2b559f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

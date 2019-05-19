@@ -29,17 +29,7 @@ public class Evento extends	Model<Evento> {
 	private Date data;
 	private String nome;
 	private TipoEvento tipoEvento;
-	private List<TurmaVoluntario> listaTurmas;
 	
-	
-	public List<TurmaVoluntario> getListaTurmas() {
-		return listaTurmas;
-	}
-
-	public void setListaTurmas(List<TurmaVoluntario> list) {
-		this.listaTurmas = list;
-	}
-
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stubLocalTime

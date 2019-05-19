@@ -25,7 +25,8 @@
 							<p:commandButton value="Selecinar" 
 								actionListener="#{turmaVoluntarioController.buscaTurmaByCor}"
 								disabled ="#{turmaVoluntarioController.entity.id != null}"
-								process="panel" update="form" />	
+								process="panel" update="form" />
+									
 					</p:panel>
 						<p:dataTable id="dataTable" value="#{turmaVoluntarioController.listaTurma}" var="objeto"
 							widgetVar="dataTableWV" >

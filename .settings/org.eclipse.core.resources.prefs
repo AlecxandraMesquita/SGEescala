@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
-encoding//WebContent/report/relEscala.jrxml=UTF-8
-encoding//WebContent/report/reportEscala.jrxml=UTF-8
+encoding//WebContent/reports/relEquipe.jrxml=UTF-8
+encoding//WebContent/reports/relEscala.jrxml=UTF-8
+encoding//WebContent/resources/img/excel.png=ISO-8859-1

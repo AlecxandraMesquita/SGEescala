@@ -11,10 +11,6 @@ import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 
-import org.springframework.jdbc.object.UpdatableSqlQuery;
-
-import com.mysql.cj.jdbc.result.UpdatableResultSet;
-
 import br.com.sgeescala.factory.JPAFactory;
 import br.com.sgeescala.list.controller.EventoListController;
 import br.com.sgeescala.list.controller.VoluntarioListController;
@@ -29,12 +25,9 @@ import br.com.sgeescala.repository.TurmaVoluntarioRepository;
 import br.com.sgeescala.repository.VoluntarioRepository;
 import br.com.sgeescala.validation.EscalaValidation;
 import br.unitins.frame.application.ApplicationException;
-import br.unitins.frame.application.Config;
 import br.unitins.frame.application.SelectionListener;
-import br.unitins.frame.application.Util;
 import br.unitins.frame.application.ValidationException;
 import br.unitins.frame.controller.Controller;
-import br.unitins.frame.repository.Repository;
 import br.unitins.frame.validation.Validation;
 
 @ManagedBean
@@ -50,8 +43,7 @@ public class EscalaController extends Controller<Escala>{
 	private CorEquipes cor;
 	private Escala voluntario;
 	private Escala escala;
-	private Evento evento;
-	private Evento evento2;
+
 	
 	@Override
 	protected EntityManager getEntityManager() {

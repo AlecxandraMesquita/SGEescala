@@ -84,46 +84,6 @@ public class EscalaRepository extends Repository<Escala> {
 		return escala;
 
 	}
-	
-	public void trocaEscala(Escala escala, Integer idVoluntario) {
-//		Query query = geEntityManager().createNativeQuery("update ESCALA set VOLUNTARIO_ID ="+idVoluntario+" where ID = "+escala.getId());
-		Query query = geEntityManager().createNativeQuery("update ESCALA set VOLUNTARIO_ID = :idVoluntario  where ID = :idEscala", Escala.class);
-		query.setParameter("idVoluntario",idVoluntario);
-		query.setParameter("idEscala", escala.getId());
-		System.out.println("query "+query.executeUpdate());
-//		query.executeUpdate();
-//		Escala troca = null;
-//		try {
-//			troca = (Escala) query.getSingleResult();	
-//		} catch (javax.persistence.NoResultException exception) {
-//			
-//		}
-		System.out.println("query "+query);
-//		geEntityManager().getTransaction().commit();
-	}
-	
-	
-	@SuppressWarnings("uncheckd")
-	public Escala trocaEscala2(Escala escala) {
-		
-		
-		int idvolu = escala.getVoluntario().getId();
-		int id = escala.getId();
-	
-		Query query = geEntityManager().createQuery("UPDATE Escala es SET es.voluntario.id = :idVoluntario WHERE es.id = :idEscala ");	
-		query.setParameter("idVoluntario", idvolu);
-		query.setParameter("idEscala", id);
-		
-		Escala troca = null;
-		try {
-			troca = (Escala) query.getSingleResult();	
-		} catch (javax.persistence.NoResultException exception) {
-			
-		}
-	
-		return troca;		
-	}
-	
 
 	public List<Escala>  buscarEscalaCor(Integer id) {
 
