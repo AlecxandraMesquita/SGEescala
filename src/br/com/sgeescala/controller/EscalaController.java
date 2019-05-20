@@ -126,6 +126,7 @@ public class EscalaController extends Controller<Escala>{
 		//CorEquipesController grupoCores = new CorEquipesController();
 		TurmaVoluntarioRepository repository = new TurmaVoluntarioRepository(JPAFactory.getEntityManager());
 		List<Voluntario> listaVoluntario = repository.buscarVoluntarioCor(cor);
+		List<Voluntario> listaVoluntarioGeral = repository.buscarVoluntarioGeral();
 		List<Voluntario> equipeA = new ArrayList<Voluntario>();
 		List<Voluntario> equipeB = new ArrayList<Voluntario>();
 		List<Voluntario> listPopulacaoI = new ArrayList<Voluntario>();			
@@ -143,15 +144,11 @@ public class EscalaController extends Controller<Escala>{
 				
 				int posicaoSorteada = rand.nextInt(intervaloSorteio.size());
 				
-				System.out.println("Size: "+intervaloSorteio.size());
+
 				int conteudoSorteado = intervaloSorteio.get(posicaoSorteada);
 				
-				System.out.println("Randomico: "+posicaoSorteada);
-				System.out.println("Indice de L: "+conteudoSorteado);
-				
-				listPopulacaoI.add(listaVoluntario.get(conteudoSorteado));
 
-				System.out.println(listPopulacaoI.get(i).getPessoa().getNome());
+				listPopulacaoI.add(listaVoluntario.get(conteudoSorteado));
 
 				for (int j = 0; j<intervaloSorteio.size(); j++) {
 					if (conteudoSorteado==intervaloSorteio.get(j)) {
@@ -179,7 +176,6 @@ public class EscalaController extends Controller<Escala>{
 							break;
 						}
 					}
-					System.out.println(equipeA.get(k).getPessoa().getNome());
 				}
 				//vrifica a lista para adicionar na equipe B (pai2)
 				if(intervaloSorteio.isEmpty()) {
@@ -194,7 +190,6 @@ public class EscalaController extends Controller<Escala>{
 							break;
 						}
 					}
-					System.out.println(equipeB.get(k).getPessoa().getNome());
 				}
 			}
 			//Cruzamento
@@ -204,44 +199,33 @@ public class EscalaController extends Controller<Escala>{
 			int metadeB = (int) tamanhoB/2;
 			for (int i=0; i<metadeA; i++) {
 				escalaA.add(equipeA.get(i));
-				System.out.println("escala A: "+ escalaA.get(i).getPessoa().getNome());
 			}
 			for (int i=metadeA; i<tamanhoA; i++) {
 				escalaB.add(equipeA.get(i));
-//				System.out.println("escala B: "+ escalaB.get(i).getPessoa().getNome());
 			}
 			for (int i=0; i<metadeB; i++) {
 				escalaB.add(equipeB.get(i));
-				System.out.println("escala B: "+ escalaB.get(i).getPessoa().getNome());
 			}
 			for (int i=metadeB; i<tamanhoB; i++) {
 				escalaA.add(equipeB.get(i));
-				System.out.println("escala A: "+ escalaA.get(i).getPessoa().getNome());
 			}
 			
 			//grava dados na base
-			System.out.println("cor : "+ cor.getNome());
 			int tamanhoEvanto = listaEvento.size();
 			int metadeTamanhoEv = tamanhoEvanto/2;
 			for (int i = 0; i < listaEvento.size(); i ++) {
-				System.out.println("listaEvento : "+ listaEvento.get(i).getNome());
 				if (listaEvento.get(i).getTipoEvento().getValor().equals(0)) {
-					System.out.println("listaEvento : "+ listaEvento.get(i).getTipoEvento());
 					for(int j = 0; j < equipeA.size(); j++) {
 						getEntity().setCorE(cor);
 						getEntity().setEvento(listaEvento.get(i));
 						getEntity().setVoluntario(equipeA.get(j));
-						System.out.println("escalado A: "+ getEntity().getVoluntario().getPessoa().getNome());
 						insert(actionEvent);
 					}
 					i++;
-					System.out.println("listaEvento : "+ listaEvento.get(i).getNome());
-					System.out.println("listaEvento : "+ listaEvento.get(i).getTipoEvento());
 					for(int j = 0; j < equipeB.size(); j++) {
 						getEntity().setCorE(cor);
 						getEntity().setEvento(listaEvento.get(i));
 						getEntity().setVoluntario(equipeB.get(j));
-						System.out.println("escalado B: "+ getEntity().getVoluntario().getPessoa().getNome());
 						insert(actionEvent);
 					}
 				}else {
@@ -249,7 +233,110 @@ public class EscalaController extends Controller<Escala>{
 						getEntity().setCorE(cor);
 						getEntity().setEvento(listaEvento.get(i));
 						getEntity().setVoluntario(listPopulacaoI.get(j));
-						System.out.println("escalado A e B: "+ getEntity().getVoluntario().getPessoa().getNome());
+						insert(actionEvent);
+					}
+				}
+			}
+			
+		}else {
+
+//			For de verificação para não repetição dos campos sorteados
+			for (int i=0; i<listaVoluntarioGeral.size(); i++) {
+				intervaloSorteio.add(i);
+			}
+			//População inicial	
+			for (int i=0; i<listaVoluntarioGeral.size(); i++) {
+				Random rand = new Random();
+				
+				int posicaoSorteada = rand.nextInt(intervaloSorteio.size());
+				
+				int conteudoSorteado = intervaloSorteio.get(posicaoSorteada);
+				
+				listPopulacaoI.add(listaVoluntarioGeral.get(conteudoSorteado));
+
+				for (int j = 0; j<intervaloSorteio.size(); j++) {
+					if (conteudoSorteado==intervaloSorteio.get(j)) {
+						intervaloSorteio.remove(j);
+						break;
+					}
+				}
+			}
+			//Gera os pais
+			for (int i=0; i<listaVoluntarioGeral.size(); i++) {
+				intervaloSorteio.add(i);
+			}
+			for(int k = 0; k<listPopulacaoI.size();k++) {
+				Random rand = new Random();
+				//vrifica a lista para adicionar na equipe A (pai1)
+				if (intervaloSorteio.isEmpty()) {
+					break;
+				}else {
+					int posicaoSorteadaA = rand.nextInt(intervaloSorteio.size());
+					int conteudoSorteadoA = intervaloSorteio.get(posicaoSorteadaA);
+					equipeA.add(listPopulacaoI.get(conteudoSorteadoA));
+					for (int j = 0; j<intervaloSorteio.size(); j++) {
+						if (conteudoSorteadoA==intervaloSorteio.get(j)) {
+							intervaloSorteio.remove(j);
+							break;
+						}
+					}
+				}
+				//vrifica a lista para adicionar na equipe B (pai2)
+				if(intervaloSorteio.isEmpty()) {
+					break;
+				}else {
+					int posicaoSorteadaB = rand.nextInt(intervaloSorteio.size());
+					int conteudoSorteadoB = intervaloSorteio.get(posicaoSorteadaB);
+					equipeB.add(listPopulacaoI.get(conteudoSorteadoB));
+					for (int j = 0; j<intervaloSorteio.size(); j++) {
+						if (conteudoSorteadoB==intervaloSorteio.get(j)) {
+							intervaloSorteio.remove(j);
+							break;
+						}
+					}
+				}
+			}
+			//Cruzamento
+			int tamanhoA = equipeA.size();
+			int tamanhoB = equipeB.size();
+			int metadeA = (int) tamanhoA/2;
+			int metadeB = (int) tamanhoB/2;
+			for (int i=0; i<metadeA; i++) {
+				escalaA.add(equipeA.get(i));
+			}
+			for (int i=metadeA; i<tamanhoA; i++) {
+				escalaB.add(equipeA.get(i));
+			}
+			for (int i=0; i<metadeB; i++) {
+				escalaB.add(equipeB.get(i));
+			}
+			for (int i=metadeB; i<tamanhoB; i++) {
+				escalaA.add(equipeB.get(i));
+			}
+			
+			//grava dados na base
+			int tamanhoEvanto = listaEvento.size();
+			int metadeTamanhoEv = tamanhoEvanto/2;
+			for (int i = 0; i < listaEvento.size(); i ++) {
+				if (listaEvento.get(i).getTipoEvento().getValor().equals(0)) {
+					for(int j = 0; j < equipeA.size(); j++) {
+						getEntity().setCorE(cor);
+						getEntity().setEvento(listaEvento.get(i));
+						getEntity().setVoluntario(equipeA.get(j));
+						insert(actionEvent);
+					}
+					i++;
+					for(int j = 0; j < equipeB.size(); j++) {
+						getEntity().setCorE(cor);
+						getEntity().setEvento(listaEvento.get(i));
+						getEntity().setVoluntario(equipeB.get(j));
+						insert(actionEvent);
+					}
+				}else {
+					for(int j = 0; j < listPopulacaoI.size(); j++) {
+						getEntity().setCorE(cor);
+						getEntity().setEvento(listaEvento.get(i));
+						getEntity().setVoluntario(listPopulacaoI.get(j));
 						insert(actionEvent);
 					}
 				}

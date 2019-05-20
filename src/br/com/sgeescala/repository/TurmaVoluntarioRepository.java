@@ -105,6 +105,15 @@ public class TurmaVoluntarioRepository extends Repository<TurmaVoluntario>{
 		return lista;
 	}
 	
+	public List<Voluntario>  buscarVoluntarioGeral() {
+		Query query = geEntityManager().createQuery("SELECT tv.voluntario FROM TurmaVoluntario tv ORDER BY tv.voluntario.opcao");	
+		List<Voluntario> lista = query.getResultList();
+		if (lista == null)
+			lista = new ArrayList<Voluntario>();
+		
+		return lista;
+	}
+	
 	
 	
 	
