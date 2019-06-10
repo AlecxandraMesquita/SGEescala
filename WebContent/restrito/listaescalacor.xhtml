@@ -25,7 +25,12 @@
 							<p:commandButton value="Selecinar" 
 								actionListener="#{escalaController.buscaEscalaByCor}"
 								disabled ="#{escalaController.entity.id != null}"
-								process="panel" update="form" />	
+								process="panel" update="form" />
+								
+							<!--  <a class="navbar-brand" href="#">
+							   	<p:graphicImage library="img" name="img/pdfs.png" width="4%" height="4%" />
+							 </a>
+								 -->
 					</p:panel>
 						<p:dataTable id="dataTable" value="#{escalaController.listaEscala}" var="objeto"
 							widgetVar="dataTableWV" >
@@ -39,11 +44,11 @@
 				    				#{objeto.voluntario.pessoa.nome}
 					    		</p:column>
 							
-								<p:column>
+				<!-- 				<p:column>
 									<f:facet name="header">Telefone</f:facet>
 					    				#{objeto.voluntario.pessoa.telefone}
 					    		</p:column>
-					    		
+				 -->	    		
 						</p:dataTable> 					
 				</h:form>
 			</center>	

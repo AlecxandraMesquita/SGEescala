@@ -114,37 +114,14 @@ public class TurmaVoluntarioRepository extends Repository<TurmaVoluntario>{
 		return lista;
 	}
 	
-	
-	
-	
-//	
-//	public List<TurmaVoluntario>  buscarVoluntarioCor(CorEquipes cor) {
-//		String sql = "SELECT tv.voluntario FROM TurmaVoluntario tv ";
-//		if (cor != null ) {		
-//			sql += "WHERE tv.cor.id = ?1 ";
-//		}
-//		sql += "ORDER BY tv.voluntario.opcao";
-//		Query query = geEntityManager().createQuery(sql);
-//		if(cor!= null) {
-//			query.setParameter(1, cor.getId());
-//		}
-//		List<TurmaVoluntario> lista = query.getResultList();
-//		if (lista == null)
-//			lista = new ArrayList<TurmaVoluntario>();
-//		
-//		return lista;
-//	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public List<CorEquipes>  buscarCorGeral() {
+		Query query = geEntityManager().createQuery("SELECT tv.cor FROM TurmaVoluntario tv ");	
+		List<CorEquipes> lista = query.getResultList();
+		if (lista == null)
+			lista = new ArrayList<CorEquipes>();
+		
+		return lista;
+	}
 	
 	
 	

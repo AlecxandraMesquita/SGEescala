@@ -18,8 +18,14 @@
 <h:body>
 	
 	   <h:form>
-            <p>ESCALA TRILHAR</p>
+	   	<div style="text-align:center">
+			<h2 class="center">
+        	    <p>ESCALA TRILHAR</p>
+        	    <p:graphicImage library="img" name="logotrilhar.png" width="4%" height="4%" />
+        	    </h2>
+        	    </div>
         </h:form>
+        
 	<h:panelGroup rendered="#{!empty param.login_error}">
 		<span style="color: red"> Erro ao efetuar o login.</span>
 		<br />
@@ -29,36 +35,44 @@
 
 	<form id="login" method="post"
 		action="#{request.contextPath}/j_spring_security_check" class="form-login">
-		<table class="tabela-login">
-			
-			<tr>
-				<td>LOGIN:</td>
-				<td><input type='text' name='j_username' /></td>
-			</tr>
-			<tr>
-				<td>SENHA:</td>
-				<td><input type='password' name='j_password' /></td>
-			</tr>
-			<tr>
-				<td align="right"><input type="checkbox"
-					name="_spring_security_remember_me" /></td>
-				<td>Logar automaticamente</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="Logar" class="login" /></td>
-			</tr>
-		</table>
+		<div style="text-align:center">
+			<h2 class="center">
+				<table class="tabela-login">
 		
-		<script>
-		document.getElementById("login").j_username.value = "#{SPRING_SECURITY_LAST_USERNAME}"; 
-	</script>
+					<tr>	
+						<td>LOGIN:</td>	
+						<td><input type='text' name='j_username' /></td>
+					</tr>
+					<tr>
+						<td>SENHA:</td>
+						<td><input type='password' name='j_password' /></td>
+					</tr>
+					<tr>
+						<td align="right"><input type="checkbox"
+							name="_spring_security_remember_me" /></td>
+						<td>Logar automaticamente</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Logar" class="login" /></td>
+					</tr>
+			
+				</table>
+		
+				<script>
+					document.getElementById("login").j_username.value = "#{SPRING_SECURITY_LAST_USERNAME}"; 
+				</script>
+			</h2>
+		</div>
 	</form>
 	
 	
             <h:form styleClass="form-rodape-login">
-    
-                <p>2019 © Escala Trinhar</p>  
+    			<div style="text-align:center">
+					<h2 class="center">
+                		<p>2019 © Escala Trinhar</p>
+                	</h2>
+                </div>		  
             </h:form>
 
 	

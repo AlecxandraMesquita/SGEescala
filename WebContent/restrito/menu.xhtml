@@ -9,10 +9,6 @@
 			<p:menu toggleable="true">
 				<p:submenu label="#{voluntarioController.voluntarioLogado.pessoa.nome}">				
 					
-					<p:menuitem title="Entre em Contato"
-						url="/publico/EnviarEmail.xhtml" value="Entrar em contato"
-						icon="fa fa-envelope" />
-					<p:separator />
 					<p:menuitem
 						onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
 						actionListener="#{voluntarioController.logout}" title="Sair"
@@ -28,7 +24,9 @@
 					<p:menuitem value="Cadastro de Eventos" ajax="false" icon="ui-icon-disk"
 						url="/admin/evento.xhtml" />
 					<p:menuitem value="Gerar Escala" ajax="false" icon="ui-icon-disk"
-						url="/admin/escala.xhtml" />	
+						url="/admin/escala.xhtml" />
+					<p:menuitem value="Gerar Escala Geral" ajax="false" icon="ui-icon-disk"
+						url="/admin/escalageral.xhtml" />	
 					<p:menuitem value="Troca Escala" ajax="false" icon="ui-icon-disk"
 						url="/admin/trocaescala.xhtml" />	
 					

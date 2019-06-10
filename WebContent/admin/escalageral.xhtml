@@ -38,18 +38,10 @@
 						
 							/> 
 							
-							<p:selectOneMenu 
-								value = "#{escalaController.cor}">
-								<f:converter converterId = "CorEquipesConverter" />
-								<f:selectItem itemLabel= "Cor da Turma" />
-								<f:selectItems value ="#{escalaController.listaCor}" 
-								var="st" itemLabel = "#{st.nome}" itemValue="#{st}" />
-							</p:selectOneMenu>
-							
 						</p:panelGrid>	
 						<br/>
 							<p:commandButton value="Gerar" 
-								actionListener="#{escalaController.getGerarEscala}"
+								actionListener="#{escalaController.getGerarEscalaGeral}"
 								disabled="#{escalaController.entity.id != null}"
 								process="panel" update="form" />	
 					</p:panel>
@@ -65,11 +57,11 @@
 				    				#{objeto.voluntario.pessoa.nome}
 					    		</p:column>
 							
-							<!-- 	<p:column>
+								<!-- <p:column>
 									<f:facet name="header">Telefone</f:facet>
 					    				#{objeto.voluntario.pessoa.telefone}
-					    		</p:column>
-					    	 -->	
+					    		</p:column> -->
+					    		
 						</p:dataTable> 				
 				</h:form>
 			</center>	
